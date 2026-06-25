@@ -5,6 +5,7 @@ import './globals.css'
 import { SiteHeader } from '@/components/site-header'
 import { SiteFooter } from '@/components/site-footer'
 import { LanguageProvider } from '@/lib/i18n'
+import { EmberField } from '@/components/ember-field'
 
 const inter = Inter({ variable: '--font-inter', subsets: ['latin'] })
 const cinzel = Cinzel({
@@ -65,6 +66,7 @@ export default function RootLayout({
         <div className="site-bg" aria-hidden="true">
           <span />
         </div>
+        <EmberField />
         <LanguageProvider>
           <SiteHeader />
           <main className="min-h-screen">{children}</main>
