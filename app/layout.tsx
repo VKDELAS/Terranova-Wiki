@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   title: 'TerraNova Wiki — Ancient dragons, lost empires and untamed nature',
   description:
     'The community wiki for TerraNova, a Minecraft Bedrock addon by KyuuDesperation. Creatures, biomes, items, lore and changelog.',
-  generator: 'v0.app',
+  generator: 'VK_DELAS',
   icons: {
     icon: [
       {

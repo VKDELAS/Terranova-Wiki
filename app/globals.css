@@ -575,29 +575,66 @@
 
 .ember-particle {
   position: absolute;
-  bottom: -5%;
+  bottom: -6%;
   border-radius: 9999px;
   animation-name: ember-field-rise;
-  animation-timing-function: ease-in;
+  animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
   animation-iteration-count: infinite;
 }
 
+/* Partícula ouro — brilho quente */
 .ember-particle--gold {
-  background: var(--accent-gold);
-  box-shadow: 0 0 6px 1px rgba(201, 151, 58, 0.6);
+  background: radial-gradient(circle at 40% 35%, #ffe59a 0%, #c9973a 55%, #8b5e15 100%);
+  box-shadow:
+    0 0 6px 2px rgba(201, 151, 58, 0.75),
+    0 0 14px 3px rgba(201, 151, 58, 0.35);
 }
 
+/* Partícula verde — brilho esmeralda */
 .ember-particle--green {
-  background: var(--accent-green);
-  box-shadow: 0 0 6px 1px rgba(93, 191, 114, 0.55);
+  background: radial-gradient(circle at 40% 35%, #b8ffca 0%, #5dbf72 55%, #277a3c 100%);
+  box-shadow:
+    0 0 6px 2px rgba(93, 191, 114, 0.75),
+    0 0 14px 3px rgba(93, 191, 114, 0.35);
+}
+
+/* Partículas grandes: brilho mais intenso */
+.ember-particle--big.ember-particle--gold {
+  background: radial-gradient(circle at 38% 32%, #fff5c0 0%, #f0d050 40%, #c9973a 75%, #8b5e15 100%);
+  box-shadow:
+    0 0 10px 4px rgba(240, 208, 80, 0.9),
+    0 0 24px 8px rgba(201, 151, 58, 0.55),
+    0 0 40px 12px rgba(201, 151, 58, 0.2);
+}
+
+.ember-particle--big.ember-particle--green {
+  background: radial-gradient(circle at 38% 32%, #e0fff0 0%, #80ffaa 40%, #5dbf72 75%, #277a3c 100%);
+  box-shadow:
+    0 0 10px 4px rgba(128, 255, 170, 0.9),
+    0 0 24px 8px rgba(93, 191, 114, 0.55),
+    0 0 40px 12px rgba(93, 191, 114, 0.2);
 }
 
 @keyframes ember-field-rise {
-  0%   { transform: translate(0, 0) scale(0.6); opacity: 0; }
-  10%  { opacity: 0.85; }
-  50%  { transform: translate(calc(var(--drift) * 0.5), -55vh) scale(1); }
-  90%  { opacity: 0.5; }
-  100% { transform: translate(var(--drift), -110vh) scale(0.7); opacity: 0; }
+  0% {
+    transform: translate(0, 0) scale(0.5) rotate(0deg);
+    opacity: 0;
+  }
+  8% {
+    opacity: 1;
+  }
+  40% {
+    transform: translate(calc(var(--drift) * 0.4), -45vh) scale(1.1) rotate(60deg);
+    opacity: 0.85;
+  }
+  75% {
+    transform: translate(calc(var(--drift) * 0.8), -80vh) scale(0.9) rotate(120deg);
+    opacity: 0.55;
+  }
+  100% {
+    transform: translate(var(--drift), -115vh) scale(0.4) rotate(180deg);
+    opacity: 0;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
