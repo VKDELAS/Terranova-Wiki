@@ -1,0 +1,565 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-cinzel), ui-serif, Georgia, serif;
+  --font-serif: var(--font-cinzel), ui-serif, Georgia, serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
+  --font-display: var(--font-press-start), ui-monospace, monospace;
+
+  /* TerraNova palette mapped to Tailwind utilities */
+  --color-deep: var(--bg-deep);
+  --color-surface: var(--bg-surface);
+  --color-elevated: var(--bg-elevated);
+  --color-edge: var(--edge);
+  --color-gold: var(--accent-gold);
+  --color-ember-green: var(--accent-green);
+  --color-ember-red: var(--accent-red);
+  --color-info-blue: var(--accent-blue);
+  --color-parchment: var(--text-primary);
+  --color-faded: var(--text-secondary);
+  --color-dim: var(--text-dim);
+
+  /* shadcn token bindings */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+}
+
+:root {
+  color-scheme: dark;
+  /* TerraNova raw palette */
+  --bg-deep: #0c0e10;
+  --bg-surface: #13181c;
+  --bg-elevated: #1c2228;
+  --edge: #2a3340;
+  --accent-gold: #c9973a;
+  --accent-green: #5dbf72;
+  --accent-red: #c0412a;
+  --accent-blue: #4a90d9;
+  --text-primary: #e8e2d8;
+  --text-secondary: #8b9aa8;
+  --text-dim: #556070;
+  --glow-gold: rgba(201, 151, 58, 0.15);
+  --glow-green: rgba(93, 191, 114, 0.12);
+
+  /* parchment-toned lore surface */
+  --bg-parchment: #13100c;
+
+  /* shadcn semantic tokens bound to palette */
+  --background: var(--bg-deep);
+  --foreground: var(--text-primary);
+  --card: var(--bg-surface);
+  --card-foreground: var(--text-primary);
+  --popover: var(--bg-elevated);
+  --popover-foreground: var(--text-primary);
+  --primary: var(--accent-gold);
+  --primary-foreground: #1a0d00;
+  --secondary: var(--bg-elevated);
+  --secondary-foreground: var(--text-primary);
+  --muted: var(--bg-elevated);
+  --muted-foreground: var(--text-secondary);
+  --accent: var(--bg-elevated);
+  --accent-foreground: var(--text-primary);
+  --destructive: var(--accent-red);
+  --border: var(--edge);
+  --input: var(--edge);
+  --ring: var(--accent-gold);
+  --radius: 0.625rem;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply text-foreground;
+    background-color: transparent;
+  }
+  html {
+    @apply font-sans;
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+  }
+}
+
+/* Pixel shadow for the hero logo image */
+.logo-pixel-shadow {
+  filter: drop-shadow(3px 3px 0 #3d2000) drop-shadow(6px 6px 0 rgba(26, 13, 0, 0.8));
+  image-rendering: auto;
+}
+
+/* Floating drift for the logo image */
+@keyframes logo-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.logo-float {
+  animation: logo-float 5s ease-in-out infinite;
+  will-change: transform;
+}
+
+/* Warm pulsing glow around the logo image */
+@keyframes logo-glow {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 10px rgba(201, 151, 58, 0.35))
+      drop-shadow(3px 3px 0 rgba(26, 13, 0, 0.7));
+  }
+  50% {
+    filter: drop-shadow(0 0 26px rgba(201, 151, 58, 0.7))
+      drop-shadow(0 0 50px rgba(201, 151, 58, 0.35)) drop-shadow(3px 3px 0 rgba(26, 13, 0, 0.7));
+  }
+}
+
+.logo-glow.logo-pixel-shadow {
+  animation: logo-float 5s ease-in-out infinite, logo-glow 4.5s ease-in-out infinite;
+}
+
+/* Ember particle drift */
+@keyframes ember-rise {
+  0% {
+    transform: translateY(0) translateX(0);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.7;
+  }
+  85% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateY(-120px) translateX(12px);
+    opacity: 0;
+  }
+}
+
+.ember {
+  position: absolute;
+  bottom: 10%;
+  border-radius: 9999px;
+  background: var(--accent-gold);
+  animation: ember-rise linear infinite;
+  will-change: transform, opacity;
+}
+
+/* Subtle radial ember glow rising in hero */
+@keyframes ember-glow {
+  0%,
+  100% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+.hero-ember-glow {
+  animation: ember-glow 6s ease-in-out infinite;
+}
+
+/* Toast slide in */
+@keyframes toast-in {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.toast-in {
+  animation: toast-in 0.35s ease-out;
+}
+
+/* Scroll reveal */
+@keyframes reveal-up {
+  from {
+    transform: translateY(28px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.reveal {
+  opacity: 0;
+}
+
+.reveal[data-visible="true"] {
+  animation: reveal-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* Animated gradient wordmark */
+@keyframes gradient-pan {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
+}
+
+.brand-wordmark {
+  background-image: linear-gradient(
+    100deg,
+    #c9973a 0%,
+    #f0d089 25%,
+    #c9973a 50%,
+    #f0d089 75%,
+    #c9973a 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: gradient-pan 6s linear infinite;
+}
+
+/* Floating emblem */
+@keyframes emblem-float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-6px) rotate(-1.5deg);
+  }
+}
+
+.emblem-float {
+  animation: emblem-float 5s ease-in-out infinite;
+}
+
+/* Pulsing glow ring */
+@keyframes glow-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 18px rgba(201, 151, 58, 0.35), inset 0 0 10px rgba(201, 151, 58, 0.25);
+  }
+  50% {
+    box-shadow: 0 0 32px rgba(201, 151, 58, 0.6), inset 0 0 16px rgba(201, 151, 58, 0.4);
+  }
+}
+
+.emblem-glow {
+  animation: glow-pulse 4s ease-in-out infinite;
+}
+
+/* Header slide down on load */
+@keyframes header-drop {
+  from {
+    transform: translateY(-10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.header-drop {
+  animation: header-drop 0.45s ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .reveal[data-visible="true"],
+  .brand-wordmark,
+  .emblem-float,
+  .emblem-glow,
+  .logo-float,
+  .logo-glow.logo-pixel-shadow,
+  .header-drop,
+  .ember,
+  .hero-ember-glow {
+    animation: none !important;
+    opacity: 1 !important;
+  }
+}
+
+/* ---- Subtle animated site background ---- */
+.site-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-color: var(--bg-deep);
+  overflow: hidden;
+}
+
+.site-bg::before,
+.site-bg::after {
+  content: "";
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(90px);
+  opacity: 0.55;
+  will-change: transform;
+}
+
+.site-bg::before {
+  width: 55vw;
+  height: 55vw;
+  top: -12%;
+  left: -10%;
+  background: radial-gradient(circle, rgba(201, 151, 58, 0.16) 0%, transparent 70%);
+  animation: bg-drift-a 26s ease-in-out infinite;
+}
+
+.site-bg::after {
+  width: 50vw;
+  height: 50vw;
+  bottom: -15%;
+  right: -8%;
+  background: radial-gradient(circle, rgba(93, 191, 114, 0.12) 0%, transparent 70%);
+  animation: bg-drift-b 32s ease-in-out infinite;
+}
+
+/* a third roaming glow rendered as a child element */
+.site-bg span {
+  position: absolute;
+  top: 30%;
+  left: 40%;
+  width: 40vw;
+  height: 40vw;
+  border-radius: 9999px;
+  filter: blur(100px);
+  opacity: 0.4;
+  background: radial-gradient(circle, rgba(74, 144, 217, 0.1) 0%, transparent 70%);
+  animation: bg-drift-c 38s ease-in-out infinite;
+  will-change: transform;
+}
+
+@keyframes bg-drift-a {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(6vw, 5vh) scale(1.12);
+  }
+}
+
+@keyframes bg-drift-b {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(-7vw, -4vh) scale(1.15);
+  }
+}
+
+@keyframes bg-drift-c {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(-5vw, 4vh) scale(1.1);
+  }
+  66% {
+    transform: translate(5vw, -5vh) scale(0.95);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-bg::before,
+  .site-bg::after,
+  .site-bg span {
+    animation: none !important;
+  }
+}
+
+/* aged parchment noise */
+.parchment-texture {
+  background-color: var(--bg-parchment);
+  background-image: repeating-radial-gradient(
+      circle at 20% 30%,
+      rgba(201, 151, 58, 0.04) 0,
+      rgba(201, 151, 58, 0.04) 1px,
+      transparent 1px,
+      transparent 4px
+    ),
+    repeating-radial-gradient(
+      circle at 80% 70%,
+      rgba(255, 255, 255, 0.02) 0,
+      rgba(255, 255, 255, 0.02) 1px,
+      transparent 1px,
+      transparent 5px
+    );
+}
+
+/* ---- Bloom / glow effects for highlighted messages ---- */
+@keyframes bloom-pulse {
+  0%,
+  100% {
+    text-shadow: 0 0 6px rgba(201, 151, 58, 0.35), 0 0 18px rgba(201, 151, 58, 0.25);
+  }
+  50% {
+    text-shadow: 0 0 12px rgba(201, 151, 58, 0.7), 0 0 34px rgba(201, 151, 58, 0.45),
+      0 0 60px rgba(201, 151, 58, 0.25);
+  }
+}
+
+/* Gold bloom on important copy */
+.bloom-gold {
+  color: var(--accent-gold);
+  animation: bloom-pulse 3.5s ease-in-out infinite;
+}
+
+/* Green bloom (success / passive) */
+.bloom-green {
+  color: var(--accent-green);
+  text-shadow: 0 0 10px rgba(93, 191, 114, 0.55), 0 0 26px rgba(93, 191, 114, 0.3);
+}
+
+/* Static soft bloom for headings */
+.bloom-soft {
+  text-shadow: 0 0 10px rgba(201, 151, 58, 0.45), 0 0 30px rgba(201, 151, 58, 0.2);
+}
+
+/* Box bloom halo behind cards / images */
+.bloom-halo {
+  box-shadow: 0 0 0 1px rgba(201, 151, 58, 0.18), 0 18px 60px -20px rgba(201, 151, 58, 0.4);
+}
+
+/* ---- Featured highlight card animations ---- */
+@keyframes card-rise {
+  from {
+    transform: translateY(36px) scale(0.97);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+.highlight-card {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.45s ease,
+    border-color 0.45s ease;
+}
+
+.highlight-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(201, 151, 58, 0.6);
+  box-shadow: 0 24px 70px -28px rgba(201, 151, 58, 0.55);
+}
+
+.highlight-card .hc-img {
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), filter 0.5s ease;
+}
+
+.highlight-card:hover .hc-img {
+  transform: scale(1.08);
+  filter: brightness(1.12) saturate(1.1);
+}
+
+/* sweeping shimmer that crosses a card on hover */
+@keyframes sweep {
+  0% {
+    transform: translateX(-120%) skewX(-18deg);
+  }
+  100% {
+    transform: translateX(220%) skewX(-18deg);
+  }
+}
+
+.shimmer-on-hover::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    100deg,
+    transparent 30%,
+    rgba(240, 208, 137, 0.18) 50%,
+    transparent 70%
+  );
+  transform: translateX(-120%) skewX(-18deg);
+  pointer-events: none;
+  z-index: 5;
+}
+
+.shimmer-on-hover:hover::after {
+  animation: sweep 0.9s ease-out;
+}
+
+/* slow floating drift for accent elements */
+@keyframes drift {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.float-slow {
+  animation: drift 6s ease-in-out infinite;
+}
+
+/* animated counter glow chip */
+@keyframes chip-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 0 1px rgba(201, 151, 58, 0.25), 0 0 14px rgba(201, 151, 58, 0.15);
+  }
+  50% {
+    box-shadow: 0 0 0 1px rgba(201, 151, 58, 0.5), 0 0 26px rgba(201, 151, 58, 0.35);
+  }
+}
+
+.stat-chip {
+  animation: chip-glow 4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bloom-gold,
+  .float-slow,
+  .stat-chip,
+  .highlight-card,
+  .highlight-card .hc-img,
+  .shimmer-on-hover::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
