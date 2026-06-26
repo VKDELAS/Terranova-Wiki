@@ -84,7 +84,7 @@ export function EmberField() {
       style={{
         position: 'fixed',
         inset: 0,
-        zIndex: 0,
+        zIndex: 5,
         overflow: 'hidden',
         pointerEvents: 'none',
       }}

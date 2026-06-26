@@ -7,47 +7,26 @@ import { LINKS } from "@/lib/terranova-data"
 import { BrandLogoMark } from "@/components/brand-logo"
 import { useLanguage } from "@/lib/i18n"
 
-const EMBERS = Array.from({ length: 14 }, (_, i) => ({
-  left: `${(i * 7.1 + 4) % 100}%`,
-  size: 2 + (i % 3),
-  duration: 6 + (i % 5),
-  delay: i * 0.6,
-}))
-
 export function HeroSection() {
   const { t } = useLanguage()
 
   return (
     <section className="relative flex min-h-screen flex-col items-center overflow-hidden px-4 pt-28 text-center">
-      {/* Background art */}
-      <div className="absolute inset-0 -z-20">
-        <Image src="/backgraund.png" alt="" fill priority className="object-cover opacity-50" />
+      {/* Wrapper isolado SÓ do fundo — blinda contra o .site-bg do layout sem bloquear o EmberField global */}
+      <div className="absolute inset-0 z-0" style={{ isolation: 'isolate' }}>
+        {/* Background art */}
+        <div className="absolute inset-0">
+          <Image src="/backgraund.png" alt="" fill priority className="object-cover" />
+        </div>
+
+        {/* Topo limpo, degradê suave e longo até sumir a foto sem corte perceptível */}
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-deep/40" />
+        <div className="absolute inset-x-0 bottom-0 h-[85%] bg-gradient-to-b from-transparent via-deep/50 to-deep" />
+        <div className="hero-ember-glow absolute inset-x-0 bottom-0 h-1/2 bg-[radial-gradient(ellipse_at_bottom,_var(--glow-gold),_transparent_70%)]" />
       </div>
 
-      {/* Gradiente de cima pra baixo + fade total no rodapé pra foto "sumir" */}
-      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-deep/70 via-deep/50 to-deep" />
-      <div className="absolute inset-x-0 bottom-0 -z-10 h-2/3 bg-gradient-to-b from-transparent via-deep/80 to-deep" />
-      <div className="hero-ember-glow absolute inset-x-0 bottom-0 -z-10 h-1/2 bg-[radial-gradient(ellipse_at_bottom,_var(--glow-gold),_transparent_70%)]" />
-
-      {/* Floating embers */}
-      <div className="pointer-events-none absolute inset-0 -z-10">
-        {EMBERS.map((e, i) => (
-          <span
-            key={i}
-            className="ember"
-            style={{
-              left: e.left,
-              width: e.size,
-              height: e.size,
-              animationDuration: `${e.duration}s`,
-              animationDelay: `${e.delay}s`,
-            }}
-          />
-        ))}
-      </div>
-
-      {/* Logo centralizada no meio da tela */}
-      <div className="flex flex-1 items-center justify-center">
+      {/* Logo centralizada no meio da tela — isolada por causa do filter: drop-shadow */}
+      <div className="relative z-10 flex flex-1 items-center justify-center" style={{ isolation: 'isolate' }}>
         <h1 className="flex flex-col items-center">
           <span className="sr-only">TerraNova</span>
           <BrandLogoMark
@@ -59,7 +38,7 @@ export function HeroSection() {
       </div>
 
       {/* Tagline + CTAs no rodapé da hero */}
-      <div className="w-full pb-16">
+      <div className="relative z-10 w-full pb-16">
         <div className="flex items-center justify-center gap-4">
           <span className="hidden h-px w-12 bg-edge sm:block" />
           <p className="max-w-xl text-balance font-heading text-lg italic text-faded sm:text-xl">
