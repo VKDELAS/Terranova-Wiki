@@ -22,7 +22,7 @@ export function SiteHeader() {
   const pages = getPages(lang)
 
   return (
-    <header className="header-drop fixed inset-x-0 top-3 z-50 px-3 sm:top-5 sm:px-4">
+    <header className="header-drop fixed inset-x-0 top-1 z-50 px-3 sm:top-2 sm:px-4">
       <div className="mx-auto flex max-w-6xl items-center gap-4">
 
         {/* Logo — fora do pill, tamanho fixo */}
@@ -31,8 +31,8 @@ export function SiteHeader() {
           aria-label="TerraNova — início"
           className="shrink-0 transition-opacity hover:opacity-80"
         >
-          <div style={{ width: 132, height: 28 }}>
-            <BrandLogoMark size="sm" />
+          <div style={{ width: 200, height: 130 }}>
+            <BrandLogoMark size="lg" />
           </div>
         </Link>
 
@@ -106,7 +106,7 @@ export function SiteHeader() {
         </div>
 
         {/* Spacer invisível para equilibrar a logo e manter o pill centrado */}
-        <div className="hidden shrink-0 lg:block" style={{ width: 132 }} />
+        <div className="hidden shrink-0 lg:block" style={{ width: 200 }} />
       </div>
 
       {/* Menu mobile */}

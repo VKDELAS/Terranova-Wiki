@@ -21,11 +21,12 @@ export function HeroSection() {
     <section className="relative flex min-h-screen flex-col items-center overflow-hidden px-4 pt-28 text-center">
       {/* Background art */}
       <div className="absolute inset-0 -z-20">
-        <Image src="/hero-bg.png" alt="" fill priority className="object-cover opacity-50" />
+        <Image src="/backgraund.png" alt="" fill priority className="object-cover opacity-50" />
       </div>
 
-      {/* Gradiente de cima pra baixo + fade no rodapé */}
-      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-deep/70 via-deep/40 to-deep" />
+      {/* Gradiente de cima pra baixo + fade total no rodapé pra foto "sumir" */}
+      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-deep/70 via-deep/50 to-deep" />
+      <div className="absolute inset-x-0 bottom-0 -z-10 h-2/3 bg-gradient-to-b from-transparent via-deep/80 to-deep" />
       <div className="hero-ember-glow absolute inset-x-0 bottom-0 -z-10 h-1/2 bg-[radial-gradient(ellipse_at_bottom,_var(--glow-gold),_transparent_70%)]" />
 
       {/* Floating embers */}

@@ -14,7 +14,7 @@ export function SiteFooter() {
     <footer className="border-t border-edge bg-surface">
       <div className="mx-auto grid max-w-7xl gap-8 px-4 py-12 sm:px-6 md:grid-cols-3">
         <div>
-          <BrandLogoMark size="md" />
+          <BrandLogoMark size="md"/>
           <p className="mt-2 font-mono text-xs uppercase tracking-[0.2em] text-faded">{t.footer.wiki}</p>
           <p className="mt-3 max-w-xs text-sm text-faded">{t.footer.tagline}</p>
         </div>
